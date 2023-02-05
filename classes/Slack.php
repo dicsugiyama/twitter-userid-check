@@ -16,15 +16,12 @@ class Slack
         return $this;
     }
 
-    public function Notify(string $message, bool $reply_flag = false, string|null $channel = null)
+    public function Notify(string $message, bool $reply_flag = false, string|null $url = null)
     {
-        if(is_null($channel)) $channel = $this->channel;
-        if($reply_flag)
-        {
-            $message = $this->member_id . ' ' . $message;
-        }
+        if(is_null($url)) $url = $this->url;
+        if($reply_flag) $message = $this->member_id . ' ' . $message;
         $param = [
-            "channel" => $channel,
+            "channel" => $this->channel,
             "username" => $this->botname,
             "text" => "",
             "attachments" => [
